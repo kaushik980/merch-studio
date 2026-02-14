@@ -1,6 +1,77 @@
+"use client";
+
+import { useState } from "react";
 import { Phone, Mail, MapPin } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 export default function ContactPage() {
+  // ✅ Form State
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    subject: "General Inquiry",
+    message: "",
+  });
+
+  // ✅ Status Message
+  const [status, setStatus] = useState("");
+
+  // ✅ Handle Input Change
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // ✅ Email Validation
+  const validateEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  // ✅ Handle Form Submit
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Basic Validation
+    if (!formData.name || !formData.email || !formData.message) {
+      setStatus("⚠️ Please fill all required fields.");
+      return;
+    }
+
+    if (!validateEmail(formData.email)) {
+      setStatus("❌ Enter a valid email address.");
+      return;
+    }
+
+    setStatus("⏳ Sending...");
+
+    // ✅ EmailJS Config
+    const serviceID = "service_p2zipif";
+    const templateID = "template_bpdk1ma";
+    const publicKey = "i4bGyEBc8W9aH8CJV";
+
+    try {
+      await emailjs.send(serviceID, templateID, formData, publicKey);
+
+      setStatus("✅ Message sent successfully!");
+
+      // Clear Form After Send
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        subject: "General Inquiry",
+        message: "",
+      });
+    } catch (error) {
+      console.log(error);
+      setStatus("❌ Failed to send message. Try again.");
+    }
+  };
+
   return (
     <main className="min-h-screen bg-[#f7efe3] flex items-center justify-center px-6 py-16">
       <section className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -30,42 +101,54 @@ export default function ContactPage() {
 
             <p className="flex items-start gap-3">
               <MapPin className="text-[#b88a2d] mt-1" />
-              Office: 13, 19rlStroed, Suite Road,
+              Office: 13, Suite Road,
               <br />
-              Halwalt, City, 06000
+              Halwalt City, 06000
             </p>
-          </div>
-
-          {/* Illustration Placeholder */}
-          <div className="mt-10">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/3063/3063822.png"
-              alt="Handshake Illustration"
-              className="w-40 opacity-80"
-            />
           </div>
         </div>
 
         {/* ================= RIGHT FORM CARD ================= */}
         <div className="bg-white/40 backdrop-blur-md border border-[#e5d5c5] rounded-3xl shadow-xl p-10">
-
           <h2 className="text-2xl font-bold text-[#2b1a12] mb-8">
             Send us a Message
           </h2>
 
-          {/* Form */}
-          <form className="space-y-5">
+          {/* ✅ FORM */}
+          <form onSubmit={handleSubmit} className="space-y-5">
 
             {/* Row 1 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Input label="Full Name" placeholder="Full Name" />
-              <Input label="Business Email" placeholder="Business Email" />
+              <Input
+                label="Full Name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+              />
+
+              <Input
+                label="Business Email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
             </div>
 
             {/* Row 2 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Input label="Phone Number" placeholder="Phone Number" />
-              <Input label="Company Name" placeholder="Company Name" />
+              <Input
+                label="Phone Number"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+              />
+
+              <Input
+                label="Company Name"
+                name="company"
+                value={formData.company}
+                onChange={handleChange}
+              />
             </div>
 
             {/* Subject Dropdown */}
@@ -74,7 +157,12 @@ export default function ContactPage() {
                 Subject
               </label>
 
-              <select className="w-full px-4 py-3 rounded-full border border-[#d8c2a8] focus:ring-2 focus:ring-[#b88a2d] outline-none">
+              <select
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-full border border-[#d8c2a8] focus:ring-2 focus:ring-[#b88a2d] outline-none"
+              >
                 <option>General Inquiry</option>
                 <option>Sales/Request Quote</option>
                 <option>Customer Support</option>
@@ -85,6 +173,9 @@ export default function ContactPage() {
             {/* Message Box */}
             <div>
               <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
                 placeholder="Specific Project Details (Optional)"
                 rows={4}
                 className="w-full px-4 py-3 rounded-2xl border border-[#d8c2a8] focus:ring-2 focus:ring-[#b88a2d] outline-none resize-none"
@@ -92,9 +183,19 @@ export default function ContactPage() {
             </div>
 
             {/* Button */}
-            <button className="w-full bg-[#b88a2d] hover:bg-[#a67925] transition text-white font-semibold py-4 rounded-full shadow-md">
+            <button
+              type="submit"
+              className="w-full bg-[#b88a2d] hover:bg-[#a67925] transition text-white font-semibold py-4 rounded-full shadow-md"
+            >
               Send Message
             </button>
+
+            {/* Status */}
+            {status && (
+              <p className="text-center mt-4 text-sm font-medium text-[#2b1a12]">
+                {status}
+              </p>
+            )}
           </form>
         </div>
       </section>
@@ -102,13 +203,17 @@ export default function ContactPage() {
   );
 }
 
-/* ================= REUSABLE INPUT COMPONENT ================= */
+/* ================= INPUT COMPONENT ================= */
 function Input({
   label,
-  placeholder,
+  name,
+  value,
+  onChange,
 }: {
   label: string;
-  placeholder: string;
+  name: string;
+  value: string;
+  onChange: any;
 }) {
   return (
     <div>
@@ -117,7 +222,10 @@ function Input({
       </label>
       <input
         type="text"
-        placeholder={placeholder}
+        name={name}
+        value={value}
+        onChange={onChange}
+        placeholder={label}
         className="w-full px-4 py-3 rounded-full border border-[#d8c2a8] focus:ring-2 focus:ring-[#b88a2d] outline-none"
       />
     </div>
