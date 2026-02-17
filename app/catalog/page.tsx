@@ -15,7 +15,7 @@ export default function CatalogPage() {
       material: "Bamboo & Recycled Paper",
       moq: "100 units",
       image:
-        "https://images.unsplash.com/photo-1719622144274-2408ecf6f6d9?w=600&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=600&q=80",
     },
     {
       name: "Eco-Friendly Tote Bag",
@@ -46,7 +46,6 @@ export default function CatalogPage() {
           Quantities apply.
         </p>
 
-        {/* Download Button */}
         <button className="bg-[#b88a2d] hover:bg-[#a67925] text-white px-6 py-3 rounded-full font-medium shadow-md transition">
           Download PDF Catalog
         </button>
@@ -59,17 +58,18 @@ export default function CatalogPage() {
           {products.slice(0, 3).map((item, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden"
+              className="bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden hover:shadow-xl transition"
             >
-              {/* Image */}
+              {/* ✅ Same Size Image */}
               <div className="p-6">
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  width={400}
-                  height={300}
-                  className="rounded-xl object-cover mx-auto"
-                />
+                <div className="relative w-full h-52 overflow-hidden rounded-xl">
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
               </div>
 
               {/* Content */}
@@ -79,10 +79,11 @@ export default function CatalogPage() {
                 </h2>
 
                 <p className="text-sm text-gray-600 mt-2">
-                  Material: {item.material} | MOQ: {item.moq}
+                  Material: {item.material}
                 </p>
 
-                {/* Add Button */}
+                <p className="text-sm text-gray-600">MOQ: {item.moq}</p>
+
                 <button className="mt-5 w-full bg-[#b88a2d] hover:bg-[#a67925] text-white py-2 rounded-full font-medium transition">
                   ADD TO QUOTE
                 </button>
@@ -91,7 +92,7 @@ export default function CatalogPage() {
           ))}
         </div>
 
-        {/* View More Button Bottom Right */}
+        {/* View More Button */}
         <div className="flex justify-end mt-10">
           <Link
             href="/catalog/all"

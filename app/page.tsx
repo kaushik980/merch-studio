@@ -1,25 +1,43 @@
 import Navbar from "./components/Navbar";
-import HeroSection from "./components/Home";
+import HomeSection from "./components/Home";
+import CatalogPage from "./catalog/page";
+import ProcessPage from "./process/page";
+import ContactPage from "./contact/page";
 import Footer from "./components/Footer";
-import Contact from "./contact/page";
-import Team from "./team/page";
-import StoryPage from "./storyPage/page";
-import Process from "./process/page";
-import Catalog from "./catalog/page";
+import About from "./about/page";
 
-
-export default function Home() {
+export default function Page() {
   return (
-    <main className="min-h-screen bg-white">
+    <>
       <Navbar />
-      <HeroSection />
-      <StoryPage/>
-      <Process />
-      <Catalog />
 
-      <Team/>
-      <Contact />
+      {/* HOME */}
+      <section id="home">
+        <HomeSection />
+      </section>
+
+      {/* ABOUT */}
+      {/* CATALOG */}
+      <section id="about">
+        <About />
+      </section>
+
+      {/* CATALOG */}
+      <section id="catalog">
+        <CatalogPage />
+      </section>
+
+      {/* PROCESS */}
+      <section id="process">
+        <ProcessPage />
+      </section>
+
+      {/* CONTACT */}
+      <section id="contact">
+        <ContactPage />
+      </section>
+
       <Footer />
-    </main>
+    </>
   );
 }

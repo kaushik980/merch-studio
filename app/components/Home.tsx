@@ -19,17 +19,19 @@ export default function Home() {
           </p>
 
           {/* BUTTONS */}
-          <div className="mt-8 flex gap-4">
-            <button className="px-6 py-3 rounded-xl bg-[#b88a2d] text-white font-medium shadow-md hover:bg-[#a67925] transition">
+          <div className="mt-8 flex flex-row flex-nowrap gap-3 justify-center lg:justify-start">
+            {/* Button 1 */}
+            <button className="px-4 sm:px-6 py-3 rounded-xl bg-[#b88a2d] text-white font-medium shadow-md hover:bg-[#a67925] transition whitespace-nowrap">
               Explore Our Catalog
             </button>
 
+            {/* Button 2 */}
             <a
               href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button className="px-6 py-3 rounded-xl border border-[#2b1a12] text-[#2b1a12] font-medium hover:bg-white transition">
+              <button className="px-4 sm:px-6 py-3 rounded-xl border border-[#2b1a12] text-[#2b1a12] font-medium hover:bg-white transition whitespace-nowrap">
                 How It Works
               </button>
             </a>
