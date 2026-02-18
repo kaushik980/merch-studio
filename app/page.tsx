@@ -17,7 +17,6 @@ export default function Page() {
       </section>
 
       {/* ABOUT */}
-      {/* CATALOG */}
       <section id="about">
         <About />
       </section>
@@ -26,8 +25,8 @@ export default function Page() {
       <section id="catalog">
         <CatalogPage />
       </section>
-
-      {/* PROCESS */}
+    
+ {/* PROCESS */}
       <section id="process">
         <ProcessPage />
       </section>

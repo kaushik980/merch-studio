@@ -43,16 +43,24 @@ export default function Navbar() {
   // ✅ Smooth Scroll Function
  const scrollToSection = (id: string) => {
   const section = document.getElementById(id);
+  const navbar = document.querySelector("header");
 
-  if (section) {
-    section.scrollIntoView({ behavior: "smooth" });
+  if (section && navbar) {
+    const navbarHeight = navbar.offsetHeight;
 
-    // ✅ Update URL like #about, #catalog
-    window.history.pushState(null, "", `#${id}`);
+    const sectionTop =
+      section.getBoundingClientRect().top + window.scrollY;
 
+    window.scrollTo({
+      top: sectionTop - navbarHeight,
+      behavior: "smooth",
+    });
+
+    window.history.pushState(null, "", `${id}`);
     setIsOpen(false);
   }
 };
+
 
 
   return (

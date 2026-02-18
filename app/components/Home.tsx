@@ -27,7 +27,7 @@ export default function Home() {
 
             {/* Button 2 */}
             <a
-              href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+              href="https://www.youtube.com/watch?v=C1NI7BwpZ-M"
               target="_blank"
               rel="noopener noreferrer"
             >

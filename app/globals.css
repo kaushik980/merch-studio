@@ -24,7 +24,12 @@ body {
 html {
   scroll-behavior: smooth;
 }
-section {
-  scroll-margin-top: 50px;
-}
+/* section {
+  scroll-margin-top: 20px;
+} */
+/* html {
+  scroll-padding-top: 100px;
+} */
+ 
+  
 

@@ -46,9 +46,15 @@ export default function CatalogPage() {
           Quantities apply.
         </p>
 
-        <button className="bg-[#b88a2d] hover:bg-[#a67925] text-white px-6 py-3 rounded-full font-medium shadow-md transition">
-          Download PDF Catalog
-        </button>
+        <a
+  href="https://drive.google.com/drive/folders/1hov4tZYx-A1vs4HNTpGR6Vd0To2eyjF5"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="bg-[#b88a2d] hover:bg-[#a67925] text-white px-6 py-3 rounded-full font-medium shadow-md transition inline-block"
+>
+  Download PDF Catalog
+</a>
+
       </div>
 
       {/* Products Section */}
