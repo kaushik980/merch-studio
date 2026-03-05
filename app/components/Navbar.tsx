@@ -72,36 +72,44 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 md:px-10 py-5">
-        
-        {/* ✅ Logo */}
-        <button
-          onClick={() => scrollToSection("home")}
-          className="text-2xl font-bold text-slate-900"
-        >
-          Merch <span className="text-[#b88a2d]">Studio</span>
-        </button>
 
-        {/* ✅ Desktop Navigation */}
-        <nav className="hidden md:flex gap-10 font-medium">
-          {navLinks.map((link, i) => (
-            <button
-              key={i}
-              onClick={() => scrollToSection(link.href)}
-              className={`transition relative ${
-                activeSection === link.href
-                  ? "text-[#b88a2d]"
-                  : "text-slate-600 hover:text-[#b88a2d]"
-              }`}
-            >
-              {link.name}
+  {/* ✅ Logo + Brand */}
+  <button
+    onClick={() => scrollToSection("home")}
+    className="flex items-center gap-3"
+  >
+    <img
+      src="/logo finall.svg"
+      alt="Merch Studio Logo"
+      className="h-12 w-auto"
+    />
 
-              {/* Active underline */}
-              {activeSection === link.href && (
-                <span className="absolute left-0 -bottom-2 w-full h-0.5 bg-[#b88a2d] rounded-full"></span>
-              )}
-            </button>
-          ))}
-        </nav>
+    <span className="text-2xl font-bold text-slate-900">
+      Merch <span className="text-[#b88a2d]">Studio</span>
+    </span>
+  </button>
+
+  {/* ✅ Desktop Navigation */}
+  <nav className="hidden md:flex gap-10 font-medium">
+    {navLinks.map((link, i) => (
+      <button
+        key={i}
+        onClick={() => scrollToSection(link.href)}
+        className={`transition relative ${
+          activeSection === link.href
+            ? "text-[#b88a2d]"
+            : "text-slate-600 hover:text-[#b88a2d]"
+        }`}
+      >
+        {link.name}
+
+        {activeSection === link.href && (
+          <span className="absolute left-0 -bottom-2 w-full h-0.5 bg-[#b88a2d] rounded-full"></span>
+        )}
+      </button>
+    ))}
+  </nav>
+
 
         {/* ✅ Desktop Request Quote Button */}
         <button

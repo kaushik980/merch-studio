@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   MapPin,
@@ -38,17 +39,17 @@ export default function Footer() {
           {/* Logo + Name */}
           <div className="flex items-center gap-3 mb-6">
             {/* Logo Circle */}
-            <div className="w-12 h-12 rounded-full overflow-hidden border border-[#b88a2d]">
-              <img
-                src="https://t4.ftcdn.net/jpg/03/74/70/65/360_F_374706548_Abv3bm3s8mFN8XmQgYXwC9VJGyLYaOBb.jpg"
-                alt="Company Logo"
-                className="w-full h-full object-cover"
-              />
-            </div>
+          <div className="w-16 h-16 rounded-full border border-[#b88a2d] flex items-center justify-center bg-white p-2">
+  <img
+    src="/logo finall.svg"
+    alt="Company Logo"
+    className="w-full h-full object-contain"
+  />
+</div>
 
-            <h2 className="text-xl font-semibold leading-snug">
+            {/* <h2 className="text-xl font-semibold leading-snug">
               Company <br /> Logo
-            </h2>
+            </h2> */}
           </div>
 
           {/* Description */}
