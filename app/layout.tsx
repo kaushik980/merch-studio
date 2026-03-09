@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Merch Studio",
   description: "Merch Studio helps businesses create premium custom merchandise, branding solutions, and marketing products that boost identity and customer engagement.",
+  icons: {
+    icon: "/logo-finall.svg", // your favicon
+  },
 };
 
 export default function RootLayout({

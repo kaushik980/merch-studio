@@ -41,7 +41,7 @@ export default function Footer() {
             {/* Logo Circle */}
           <div className="w-16 h-16 rounded-full border border-[#b88a2d] flex items-center justify-center bg-white p-2">
   <img
-    src="/logo finall.svg"
+    src="/logo-finall.svg"
     alt="Company Logo"
     className="w-full h-full object-contain"
   />

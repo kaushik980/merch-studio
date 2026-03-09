@@ -79,7 +79,7 @@ export default function Navbar() {
     className="flex items-center gap-3"
   >
     <img
-      src="/logo finall.svg"
+      src="/logo-finall.svg"
       alt="Merch Studio Logo"
       className="h-12 w-auto"
     />
