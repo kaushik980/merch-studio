@@ -1,9 +1,11 @@
-import Image from "../../public/img1.png";
+import Image from "next/image";
+import img1 from "../../public/img1.png";
 
 export default function Home() {
   return (
-    <main className=" bg-[#f7efe3] flex items-center justify-center px-6 py-12">
+    <main className="bg-[#f7efe3] flex items-center justify-center px-6 py-12">
       <section className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        
         {/* LEFT CONTENT */}
         <div>
           <h1 className="text-3xl lg:text-4xl font-extrabold text-[#2b1a12] leading-tight">
@@ -18,20 +20,17 @@ export default function Home() {
             appreciation, and brand building.
           </p>
 
-          {/* BUTTONS */}
           <div className="mt-8 flex flex-row flex-nowrap gap-3 justify-center lg:justify-start">
-            {/* Button 1 */}
-            <button className="px-4 sm:px-6 py-3 rounded-xl bg-[#b88a2d] text-white font-medium shadow-md hover:bg-[#a67925] transition whitespace-nowrap">
+            <button className="px-6 py-3 rounded-xl bg-[#b88a2d] text-white font-medium shadow-md hover:bg-[#a67925] transition">
               Explore Our Catalog
             </button>
 
-            {/* Button 2 */}
             <a
               href="https://www.youtube.com/watch?v=C1NI7BwpZ-M"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button className="px-4 sm:px-6 py-3 rounded-xl border border-[#2b1a12] text-[#2b1a12] font-medium hover:bg-white transition whitespace-nowrap">
+              <button className="px-6 py-3 rounded-xl border border-[#2b1a12] text-[#2b1a12] font-medium hover:bg-white transition">
                 How It Works
               </button>
             </a>
@@ -39,15 +38,14 @@ export default function Home() {
         </div>
 
         {/* RIGHT IMAGE CARD */}
-        <div className="relative">
-          <div className="rounded-3xl overflow-hidden shadow-xl border border-[#e5d5c5]">
-            <img
-              src="/img1.png"
-              alt="Corporate gifting"
-              className="w-full h-105 object-cover"
-            />
-          </div>
-        </div>
+       <div className="relative w-full h-65 md:h-85 lg:h-105 rounded-3xl overflow-hidden shadow-xl border border-[#e5d5c5] bg-[#F4F2EF] flex items-center justify-center">
+  <img
+    src="/WEBSITE BANNER.png"
+    alt="Corporate gifting"
+    className="max-h-full max-w-full object-contain"
+  />
+</div>
+
       </section>
     </main>
   );
