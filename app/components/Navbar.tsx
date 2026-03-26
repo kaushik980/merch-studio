@@ -75,19 +75,19 @@ export default function Navbar() {
 
   {/* ✅ Logo + Brand */}
   <button
-    onClick={() => scrollToSection("home")}
-    className="flex items-center gap-3"
-  >
-    <img
-      src="/logo-finall.svg"
-      alt="Merch Studio Logo"
-      className="h-12 w-auto"
-    />
+  onClick={() => scrollToSection("home")}
+  className="flex items-center gap-3"
+>
+  <img
+    src="/logo-2.svg"
+    alt="Merch Studio Logo"
+    className="h-12 w-auto"  
+  />
 
-    <span className="text-2xl font-bold text-slate-900">
-      Merch <span className="text-[#b88a2d]">Studio</span>
-    </span>
-  </button>
+  {/* <span className="text-2xl font-bold bg-linear-to-r from-pink-600 via-orange-500 to-yellow-500 bg-clip-text text-transparent">
+    MerchStudio
+  </span> */}
+</button>
 
   {/* ✅ Desktop Navigation */}
   <nav className="hidden md:flex gap-10 font-medium">

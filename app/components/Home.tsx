@@ -9,15 +9,12 @@ export default function Home() {
         {/* LEFT CONTENT */}
         <div>
           <h1 className="text-3xl lg:text-4xl font-extrabold text-[#2b1a12] leading-tight">
-            Elevating Corporate <br />
-            Connections Through <br />
-            Thoughtful Gifting & <br />
-            Apparel
+          Thoughtful Gifting <br />
+           Impactful Branding
           </h1>
 
           <p className="mt-6 text-lg text-[#4a3a32] max-w-xl leading-relaxed">
-            Premium, customizable solutions for employee engagement, client
-            appreciation, and brand building.
+            From employee engagement to client appreciation, we create premium, customizable solutions that bring your brand to life.
           </p>
 
           <div className="mt-8 flex flex-row flex-nowrap gap-3 justify-center lg:justify-start">
@@ -45,7 +42,6 @@ export default function Home() {
     className="max-h-full max-w-full object-contain"
   />
 </div>
-
       </section>
     </main>
   );

@@ -4,23 +4,23 @@ export default function StoryPage() {
   const values = [
     {
       title: "Integrity & Trust",
-      desc: "Building strong, honest partnerships is at the core of everything we do.",
+      desc: "We build lasting relationships through transparency, reliability, and a commitment to doing what’s right—always.",
       icon: <Handshake size={50} className="text-[#7a4a1f]" />,
     },
     {
       title: "Innovation & Quality",
-      desc: "We constantly seek new ideas and ensure the highest standards in our products.",
+      desc: "We combine creative thinking with uncompromising quality to deliver solutions that stand out and perform.",
       icon: <Lightbulb size={50} className="text-[#7a4a1f]" />,
     },
     {
       title: "Sustainability & Responsibility",
-      desc: "We are committed to ethical sourcing and minimizing our environmental impact.",
+      desc: "We are committed to mindful sourcing and responsible practices that create value while reducing our environmental impact.",
       icon: <Leaf size={50} className="text-[#7a4a1f]" />,
     },
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#f7efe3] to-[#f2d8b5] px-6 py-20">
+    <main className="min-h-screen bg-linear-to-b from-[#f7efe3] to-[#f2d8b5] px-6 py-20">
       <div className="max-w-6xl mx-auto text-center">
 
         {/* ================= OUR STORY ================= */}
@@ -29,13 +29,12 @@ export default function StoryPage() {
         </h1>
 
         <p className="text-lg text-[#3b2a1d] leading-relaxed max-w-4xl mx-auto">
-          Founded on a passion for quality and connection, we began as a small
-          team dedicated to reimagining corporate gifting. Today, we are proud
-          to be a trusted partner for businesses worldwide, crafting memorable
-          experiences through curated apparel and thoughtful gifts. Our journey
-          is defined by a commitment to excellence and building lasting
-          relationships.
+         What started as a vision to elevate everyday corporate interactions has grown into a brand built on quality,
+        creativity, and trust. At Merch Studio, we believe that the smallest touchpoints can create the strongest impressions. <br />
+        From curated apparel to thoughtfully designed gifting solutions, we help brands turn moments into meaningful experiences. Our journey is driven by a commitment to excellence, innovation, and building relationships that last beyond business.
         </p>
+
+         
 
         {/* Divider Line */}
         <div className="border-t border-[#b88a2d] mt-16 mb-16"></div>

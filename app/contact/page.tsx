@@ -83,27 +83,29 @@ export default function ContactPage() {
           </h1>
 
           <p className="text-lg text-[#4a3a32] leading-relaxed max-w-md mb-10">
-            Have a question or a project in mind? We’d love to hear from you.
-            Fill out the form, and our team will get back to you shortly.
+            Have a project in mind or looking for the perfect gifting solution? <br />
+We’d love to hear from you. <br />
+Share your requirements with us, and our team will get back to you with tailored ideas and solutions.
+
           </p>
 
           {/* Contact Details */}
           <div className="space-y-5 text-[#4a3a32] text-base">
             <p className="flex items-center gap-3">
               <Phone className="text-[#b88a2d]" />
-              +1 123-356-7800
+              +91 9873303655
             </p>
 
             <p className="flex items-center gap-3">
               <Mail className="text-[#b88a2d]" />
-              info.mas.team@gmail.com
+              info@merchstudio.in
             </p>
 
             <p className="flex items-start gap-3">
               <MapPin className="text-[#b88a2d] mt-1" />
-              Office: 13, Suite Road,
+              Office: Plot No 370, 2nd Floor, Udyog Vihar Phase 4                          
               <br />
-              Halwalt City, 06000
+              Gurgaon, Haryana, India 122015                                               
             </p>
           </div>
         </div>

@@ -5,6 +5,7 @@ import ProcessPage from "./process/page";
 import ContactPage from "./contact/page";
 import Footer from "./components/Footer";
 import About from "./about/page";
+import TeamPage from "./team/page";
 
 export default function Page() {
   return (
@@ -25,7 +26,10 @@ export default function Page() {
       <section id="catalog">
         <CatalogPage />
       </section>
-    
+
+    <section >
+        <TeamPage />
+      </section>
  {/* PROCESS */}
       <section id="process">
         <ProcessPage />

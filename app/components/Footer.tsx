@@ -1,13 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  MapPin,
-  Phone,
-  Mail,
-  Linkedin,
-  Twitter,
-  Facebook,
-} from "lucide-react";
+import { MapPin, Phone, Mail, Linkedin, Twitter, Facebook } from "lucide-react";
 
 export default function Footer() {
   /* ✅ Dynamic Quick Links */
@@ -30,52 +23,12 @@ export default function Footer() {
   ];
 
   return (
+    <>
     <footer className="bg-[#201f1f] text-white pt-16 pb-8 px-6">
       {/* Main Footer Grid */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
-
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
         {/* ================= LEFT COMPANY INFO ================= */}
-        <div>
-          {/* Logo + Name */}
-          <div className="flex items-center gap-3 mb-6">
-            {/* Logo Circle */}
-          <div className="w-16 h-16 rounded-full border border-[#b88a2d] flex items-center justify-center bg-white p-2">
-  <img
-    src="/logo-finall.svg"
-    alt="Company Logo"
-    className="w-full h-full object-contain"
-  />
-</div>
-
-            {/* <h2 className="text-xl font-semibold leading-snug">
-              Company <br /> Logo
-            </h2> */}
-          </div>
-
-          {/* Description */}
-          <p className="text-gray-300 leading-relaxed mb-6">
-            Innovation and quality in every project. Connecting talent with
-            opportunity.
-          </p>
-
-          {/* Contact Info */}
-          <div className="space-y-3 text-gray-300 text-sm">
-            <p className="flex items-center gap-2">
-              <MapPin size={18} className="text-[#b88a2d]" />
-              123 Innovation Way, Tech City
-            </p>
-
-            <p className="flex items-center gap-2">
-              <Phone size={18} className="text-[#b88a2d]" />
-              +1 (555) 123-4567
-            </p>
-
-            <p className="flex items-center gap-2">
-              <Mail size={18} className="text-[#b88a2d]" />
-              info@company.com
-            </p>
-          </div>
-        </div>
+       
 
         {/* ================= QUICK LINKS ================= */}
         <div>
@@ -86,10 +39,7 @@ export default function Footer() {
           <ul className="space-y-3 text-gray-300">
             {quickLinks.map((link) => (
               <li key={link.name}>
-                <Link
-                  href={link.href}
-                  className="hover:text-white transition"
-                >
+                <Link href={link.href} className="hover:text-white transition">
                   {link.name}
                 </Link>
               </li>
@@ -123,9 +73,7 @@ export default function Footer() {
             Stay Connected
           </h3>
 
-          <p className="text-gray-300 mb-4">
-            Sign up for our newsletter
-          </p>
+          <p className="text-gray-300 mb-4">Sign up for our newsletter</p>
 
           {/* Input */}
           <input
@@ -174,5 +122,6 @@ export default function Footer() {
         </p>
       </div>
     </footer>
+    </>
   );
 }
