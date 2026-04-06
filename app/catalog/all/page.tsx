@@ -6,33 +6,33 @@ import Link from "next/link";
 export default function FullCatalogPage() {
   const products = [
     {
-      name: "Premium Branded Hoodie",
+      name: "Seasonal gift",
       material: "100% Organic Cotton",
       moq: "50 units",
       image:
-        "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=600&q=80",
+        "/seasonal gift.png",
     },
    {
-  name: "Sustainable Office Kit",
+  name: "Classy Notebook Pen Set",
   material: "Bamboo & Recycled Paper",
   moq: "100 units",
   image:
-     "/Sustainable Office Kit.jpg",
+     "/Classy Notebook Pen Set.png",
 },
 
     {
-      name: "Eco-Friendly Tote Bag",
+      name: "Corporate essentials kit - Copy",
       material: "Reusable Canvas Fabric",
       moq: "200 units",
       image:
-        "https://images.unsplash.com/photo-1593032465175-481ac7f401a0?auto=format&fit=crop&w=600&q=80",
+        "/corporate essentials kit - Copy.png",
     },
     {
-      name: "Custom Ceramic Mug",
+      name: "DRINKWARE",
       material: "High Quality Ceramic",
       moq: "75 units",
       image:
-        "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=600&q=80",
+        "/DRINKWARE.png",
     },
     {
       name: "Luxury Gift Box Set",
@@ -41,11 +41,11 @@ export default function FullCatalogPage() {
       image: "/Luxury Gift Box Set.jpg",
     },
     {
-      name: "Corporate Notebook & Pen",
+      name: "Custome Unifrom",
       material: "Leather Finish + Metal Pen",
       moq: "150 units",
       image:
-        "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=600&q=80",
+        "/Custome Unifrom.png",
     },
   ];
 
@@ -131,11 +131,11 @@ export default function FullCatalogPage() {
                     {item.name}
                   </h2>
 
-                  <p className="text-sm text-gray-600 mt-2">
+                  {/* <p className="text-sm text-gray-600 mt-2">
                     Material: {item.material}
                   </p>
 
-                  <p className="text-sm text-gray-600">MOQ: {item.moq}</p>
+                  <p className="text-sm text-gray-600">MOQ: {item.moq}</p> */}
 
                   <button className="mt-5 w-full bg-[#b88a2d] hover:bg-[#a67925] text-white py-2 rounded-full font-medium transition">
                     ADD TO QUOTE

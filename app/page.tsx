@@ -5,7 +5,7 @@ import ProcessPage from "./process/page";
 import ContactPage from "./contact/page";
 import Footer from "./components/Footer";
 import About from "./about/page";
-import TeamPage from "./team/page";
+import TeamPage from "./Brands/page";
 
 export default function Page() {
   return (
@@ -23,9 +23,12 @@ export default function Page() {
       </section>
 
       {/* CATALOG */}
-      <section id="catalog">
+      {/* <section id="catalog">
         <CatalogPage />
-      </section>
+      </section> */}
+      <section id="catalog" className="scroll-mt-20">
+  <CatalogPage />
+</section>
 
     <section >
         <TeamPage />

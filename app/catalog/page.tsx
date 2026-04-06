@@ -4,25 +4,25 @@ import Link from "next/link";
 export default function CatalogPage() {
   const products = [
     {
-      name: "Premium Branded Hoodie",
+      name: "Seasonal gift",
       material: "100% Organic Cotton",
       moq: "50 units",
       image:
-        "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=600&q=80",
+        "/seasonal gift.png",
     },
     {
-      name: "Sustainable Office Kit",
+      name: "Corporate essentials kit - Copy",
       material: "Bamboo & Recycled Paper",
       moq: "100 units",
       image:
-        "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=600&q=80",
+        "/corporate essentials kit - Copy.png",
     },
     {
-      name: "Eco-Friendly Tote Bag",
+      name: "Classy Notebook Pen Set",
       material: "Reusable Canvas Fabric",
       moq: "200 units",
       image:
-        "https://images.unsplash.com/photo-1593032465175-481ac7f401a0?auto=format&fit=crop&w=600&q=80",
+        "/Classy Notebook Pen Set.png",
     },
     {
       name: "Custom Ceramic Mug",
@@ -68,7 +68,7 @@ export default function CatalogPage() {
             >
               {/* ✅ Same Size Image */}
               <div className="p-6">
-                <div className="relative w-full h-52 overflow-hidden rounded-xl">
+                <div className="relative w-full h-72 overflow-hidden rounded-xl">
                   <Image
                     src={item.image}
                     alt={item.name}
@@ -84,11 +84,11 @@ export default function CatalogPage() {
                   {item.name}
                 </h2>
 
-                <p className="text-sm text-gray-600 mt-2">
+                {/* <p className="text-sm text-gray-600 mt-2">
                   Material: {item.material}
                 </p>
 
-                <p className="text-sm text-gray-600">MOQ: {item.moq}</p>
+                <p className="text-sm text-gray-600">MOQ: {item.moq}</p> */}
 
                 <button className="mt-5 w-full bg-[#b88a2d] hover:bg-[#a67925] text-white py-2 rounded-full font-medium transition">
                   ADD TO QUOTE
