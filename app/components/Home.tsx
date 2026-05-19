@@ -79,12 +79,16 @@ export default function Home({ banners: initialBanners }: { banners: Banner[] })
 
           {/* Buttons */}
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link
-              href="/catalog/all"
-              className="px-6 py-3 rounded-xl bg-[#b88a2d] text-white hover:bg-[#a67925] transition inline-block"
+            <button
+              onClick={() => {
+                document.getElementById("catalog")?.scrollIntoView({
+                  behavior: "smooth",
+                });
+              }}
+              className="px-6 py-3 rounded-xl bg-[#b88a2d] text-white hover:bg-[#a67925] transition"
             >
               Explore Our Catalog
-            </Link>
+            </button>
           </div>
         </div>
       </section>
