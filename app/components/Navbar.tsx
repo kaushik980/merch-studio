@@ -1,16 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Menu, X } from "lucide-react";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-
-  // ✅ Active section state
   const [activeSection, setActiveSection] = useState("home");
-
-  // ✅ Navbar background on scroll
   const [scrolled, setScrolled] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
 
   const navLinks = [
     { name: "Home", href: "home" },
@@ -20,8 +20,10 @@ export default function Navbar() {
     { name: "Contact", href: "contact" },
   ];
 
-  // ✅ ScrollSpy Effect
+  // ✅ ScrollSpy Effect (only on home page)
   useEffect(() => {
+    if (!isHomePage) return;
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
@@ -38,28 +40,40 @@ export default function Navbar() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHomePage]);
+
+  // Always show scrolled state on non-home pages
+  useEffect(() => {
+    if (!isHomePage) {
+      setScrolled(true);
+    }
+  }, [isHomePage]);
 
   // ✅ Smooth Scroll Function
-  const scrollToSection = (id: string) => {
-    const section = document.getElementById(id);
-    const navbar = document.querySelector("header");
+  const scrollToSection = useCallback((id: string) => {
+    if (isHomePage) {
+      // On home page, scroll directly
+      const section = document.getElementById(id);
+      const navbar = document.querySelector("header");
 
-    if (section && navbar) {
-      const navbarHeight = navbar.offsetHeight;
+      if (section && navbar) {
+        const navbarHeight = navbar.offsetHeight;
+        const sectionTop = section.getBoundingClientRect().top + window.scrollY;
 
-      const sectionTop =
-        section.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+          top: sectionTop - navbarHeight,
+          behavior: "smooth",
+        });
 
-      window.scrollTo({
-        top: sectionTop - navbarHeight,
-        behavior: "smooth",
-      });
-
-      window.history.pushState(null, "", `${id}`);
+        window.history.pushState(null, "", `${id}`);
+        setIsOpen(false);
+      }
+    } else {
+      // On other pages, navigate to home and then scroll
+      router.push(`/#${id}`);
       setIsOpen(false);
     }
-  };
+  }, [isHomePage, router]);
 
 
 
