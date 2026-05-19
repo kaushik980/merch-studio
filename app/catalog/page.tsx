@@ -40,9 +40,9 @@ export default async function CatalogPage() {
               key={index}
               className="bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden hover:shadow-xl transition"
             >
-              {/* ✅ Same Size Image */}
+              {/* ✅ Square Image */}
               <div className="p-6">
-                <div className="relative w-full h-72 overflow-hidden rounded-xl bg-gray-100">
+                <div className="relative w-full aspect-square overflow-hidden rounded-xl bg-gray-100">
                   {item.image?.url && (
                     <Image
                       src={getStrapiImageUrl(item.image.url) || ''}

@@ -64,11 +64,15 @@ export default function Footer() {
           <div className="space-y-3 text-gray-300 text-sm">
             <div className="flex items-start gap-3">
               <Phone size={18} className="text-[#b88a2d] mt-0.5 flex-shrink-0" />
-              <span>+1 (555) 123-4567</span>
+              <span>+91 9873303655</span>
             </div>
             <div className="flex items-start gap-3">
               <Mail size={18} className="text-[#b88a2d] mt-0.5 flex-shrink-0" />
-              <span>hello@merchstudio.com</span>
+              <span>info@merchstudio.in</span>
+            </div>
+            <div className="flex items-start gap-3">
+              <MapPin size={18} className="text-[#b88a2d] mt-0.5 flex-shrink-0" />
+              <span>Plot No 370, 2nd Floor, Udyog Vihar Phase 4<br/>Gurgaon, Haryana, India 122015</span>
             </div>
           </div>
 

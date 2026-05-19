@@ -2,64 +2,32 @@
 
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
-  // ✅ Active section state
-  const [activeSection, setActiveSection] = useState("home");
-
   // ✅ Navbar background on scroll
   const [scrolled, setScrolled] = useState(false);
 
-  const navLinks = [
-    { name: "Home", href: "home" },
-    { name: "About", href: "about" },
-    { name: "Catalog", href: "catalog" },
-    { name: "Process", href: "process" },
-    { name: "Contact", href: "contact" },
-  ];
-
-  // ✅ ScrollSpy Effect
+  // ✅ Scroll Effect
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
-
-      navLinks.forEach((link) => {
-        const section = document.getElementById(link.href);
-        if (section) {
-          const rect = section.getBoundingClientRect();
-          if (rect.top <= 120 && rect.bottom >= 120) {
-            setActiveSection(link.href);
-          }
-        }
-      });
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ✅ Smooth Scroll Function
- const scrollToSection = (id: string) => {
-  const section = document.getElementById(id);
-  const navbar = document.querySelector("header");
-
-  if (section && navbar) {
-    const navbarHeight = navbar.offsetHeight;
-
-    const sectionTop =
-      section.getBoundingClientRect().top + window.scrollY;
-
+  // ✅ Smooth Scroll Function for Home
+  const scrollToHome = () => {
     window.scrollTo({
-      top: sectionTop - navbarHeight,
+      top: 0,
       behavior: "smooth",
     });
-
-    window.history.pushState(null, "", `${id}`);
     setIsOpen(false);
-  }
-};
+  };
 
 
 
@@ -73,51 +41,41 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 md:px-10 py-5">
 
-  {/* ✅ Logo + Brand */}
-  <button
-  onClick={() => scrollToSection("home")}
-  className="flex items-center gap-3"
->
-  <img
-    src="/logo-2.svg"
-    alt="Merch Studio Logo"
-    className="h-12 w-auto"  
-  />
+        {/* ✅ Logo + Brand */}
+        <button
+          onClick={scrollToHome}
+          className="flex items-center gap-3"
+        >
+          <img
+            src="/logo-2.svg"
+            alt="Merch Studio Logo"
+            className="h-12 w-auto"
+          />
+        </button>
 
-  {/* <span className="text-2xl font-bold bg-linear-to-r from-pink-600 via-orange-500 to-yellow-500 bg-clip-text text-transparent">
-    MerchStudio
-  </span> */}
-</button>
-
-  {/* ✅ Desktop Navigation */}
-  <nav className="hidden md:flex gap-10 font-medium">
-    {navLinks.map((link, i) => (
-      <button
-        key={i}
-        onClick={() => scrollToSection(link.href)}
-        className={`transition relative ${
-          activeSection === link.href
-            ? "text-[#b88a2d]"
-            : "text-slate-600 hover:text-[#b88a2d]"
-        }`}
-      >
-        {link.name}
-
-        {activeSection === link.href && (
-          <span className="absolute left-0 -bottom-2 w-full h-0.5 bg-[#b88a2d] rounded-full"></span>
-        )}
-      </button>
-    ))}
-  </nav>
-
+        {/* ✅ Desktop Navigation */}
+        <nav className="hidden md:flex gap-10 font-medium">
+          <button
+            onClick={scrollToHome}
+            className="text-slate-600 hover:text-[#b88a2d] transition"
+          >
+            Home
+          </button>
+          <Link
+            href="/catalog/all"
+            className="text-slate-600 hover:text-[#b88a2d] transition"
+          >
+            Catalog
+          </Link>
+        </nav>
 
         {/* ✅ Desktop Request Quote Button */}
-        <button
-          onClick={() => scrollToSection("contact")}
+        <Link
+          href="/catalog/all"
           className="hidden md:inline-block bg-[#b88a2d] text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-[#a67925] transition-all shadow-md active:scale-95"
         >
           Request a Quote
-        </button>
+        </Link>
 
         {/* ✅ Mobile Hamburger */}
         <button
@@ -131,29 +89,26 @@ export default function Navbar() {
       {/* ✅ Mobile Dropdown Menu */}
       {isOpen && (
         <div className="md:hidden bg-white border-t px-6 py-6 space-y-5 shadow-lg">
-          
-          {/* Links */}
-          {navLinks.map((link, i) => (
-            <button
-              key={i}
-              onClick={() => scrollToSection(link.href)}
-              className={`block w-full text-left font-medium ${
-                activeSection === link.href
-                  ? "text-[#b88a2d]"
-                  : "text-slate-700 hover:text-[#b88a2d]"
-              }`}
-            >
-              {link.name}
-            </button>
-          ))}
+          <button
+            onClick={scrollToHome}
+            className="block w-full text-left font-medium text-slate-700 hover:text-[#b88a2d]"
+          >
+            Home
+          </button>
+          <Link
+            href="/catalog/all"
+            className="block w-full text-left font-medium text-slate-700 hover:text-[#b88a2d]"
+          >
+            Catalog
+          </Link>
 
           {/* ✅ Mobile Request Quote Button */}
-          <button
-            onClick={() => scrollToSection("contact")}
-            className="w-full bg-[#b88a2d] text-white py-3 rounded-full font-semibold hover:bg-[#a67925] transition shadow-md"
+          <Link
+            href="/catalog/all"
+            className="w-full inline-block text-center bg-[#b88a2d] text-white py-3 rounded-full font-semibold hover:bg-[#a67925] transition shadow-md"
           >
             Request a Quote
-          </button>
+          </Link>
         </div>
       )}
     </header>
