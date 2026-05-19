@@ -1,11 +1,11 @@
 import Navbar from "./components/Navbar";
 import HomeSection from "./components/Home";
 import CatalogPage from "./catalog/page";
-import ProcessPage from "./process/page";
-import ContactPage from "./contact/page";
 import Footer from "./components/Footer";
-import About from "./about/page";
-import TeamPage from "./Brands/page";
+import About from "./components/About";
+import Process from "./components/Process";
+import Contact from "./components/Contact";
+import Brands from "./components/Brands";
 import { getBanners } from "@/lib/strapi";
 
 export default async function Page() {
@@ -32,17 +32,17 @@ export default async function Page() {
 
       {/* BRANDS */}
       <section id="brands">
-        <TeamPage />
+        <Brands />
       </section>
 
       {/* PROCESS */}
       <section id="process">
-        <ProcessPage />
+        <Process />
       </section>
 
       {/* CONTACT */}
       <section id="contact">
-        <ContactPage />
+        <Contact />
       </section>
 
       <Footer />

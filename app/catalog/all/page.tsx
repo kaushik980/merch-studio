@@ -18,14 +18,22 @@ export default function FullCatalogPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/products?populate=image`,
-          {
-            headers: {
-              Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_TOKEN}`,
-            },
-          }
-        );
+        const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/products?populate=image`;
+        const token = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
+
+        console.log('Fetching from:', url);
+        console.log('Token exists:', !!token);
+
+        const res = await fetch(url, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!res.ok) {
+          throw new Error(`API error: ${res.status}`);
+        }
+
         const data = await res.json();
         const mappedProducts = data.data.map((item: any) => ({
           id: item.id,

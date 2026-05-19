@@ -1,6 +1,6 @@
 import { Handshake, Lightbulb, Leaf } from "lucide-react";
 
-export default function StoryPage() {
+export default function About() {
   const values = [
     {
       title: "Integrity & Trust",

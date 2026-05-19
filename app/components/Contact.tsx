@@ -5,7 +5,7 @@ import { Phone, Mail, MapPin } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import { postContactSubmission } from "@/lib/strapi";
 
-export default function ContactPage() {
+export default function Contact() {
   // ✅ Form State
   const [formData, setFormData] = useState({
     name: "",

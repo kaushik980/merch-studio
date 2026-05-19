@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { getBrands, getStrapiImageUrl } from "@/lib/strapi";
 
-export default async function TeamPage() {
+export default async function Brands() {
   const brands = await getBrands();
 
   return (

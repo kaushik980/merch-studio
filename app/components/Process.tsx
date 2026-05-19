@@ -5,7 +5,7 @@ import {
   Truck,
 } from "lucide-react";
 
-export default function ProcessPage() {
+export default function Process() {
   const steps = [
     {
       title: "Consultation",
