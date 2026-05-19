@@ -2,52 +2,12 @@ import Footer from "@/app/components/Footer";
 import Navbar from "@/app/components/Navbar";
 import Image from "next/image";
 import Link from "next/link";
+import { getProducts, getStrapiImageUrl } from "@/lib/strapi";
+import AddToQuoteButton from "@/app/components/AddToQuoteButton";
+import FloatingQuoteButton from "@/app/components/FloatingQuoteButton";
 
-export default function FullCatalogPage() {
-  const products = [
-    {
-      name: "Seasonal gift",
-      material: "100% Organic Cotton",
-      moq: "50 units",
-      image:
-        "/seasonal gift.png",
-    },
-   {
-  name: "Classy Notebook Pen Set",
-  material: "Bamboo & Recycled Paper",
-  moq: "100 units",
-  image:
-     "/Classy Notebook Pen Set.png",
-},
-
-    {
-      name: "Corporate essentials kit - Copy",
-      material: "Reusable Canvas Fabric",
-      moq: "200 units",
-      image:
-        "/corporate essentials kit - Copy.png",
-    },
-    {
-      name: "DRINKWARE",
-      material: "High Quality Ceramic",
-      moq: "75 units",
-      image:
-        "/DRINKWARE.png",
-    },
-    {
-      name: "Luxury Gift Box Set",
-      material: "Recycled Packaging",
-      moq: "30 units",
-      image: "/Luxury Gift Box Set.jpg",
-    },
-    {
-      name: "Custome Unifrom",
-      material: "Leather Finish + Metal Pen",
-      moq: "150 units",
-      image:
-        "/Custome Unifrom.png",
-    },
-  ];
+export default async function FullCatalogPage() {
+  const products = await getProducts();
 
   return (
     <>
@@ -115,13 +75,20 @@ export default function FullCatalogPage() {
               >
                 {/* ✅ Fixed Image Box */}
                 <div className="p-6">
-                  <div className="relative w-full h-52 overflow-hidden rounded-xl">
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      fill
-                      className="object-cover"
-                    />
+                  <div className="relative w-full h-52 overflow-hidden rounded-xl bg-gray-100">
+                    {item.image?.url && (
+                      <Image
+                        src={getStrapiImageUrl(item.image.url) || ''}
+                        alt={item.image.alternativeText || item.name}
+                        fill
+                        className="object-cover"
+                      />
+                    )}
+                    {!item.image?.url && (
+                      <div className="flex items-center justify-center h-full bg-gray-200 text-gray-500">
+                        No image
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -137,21 +104,17 @@ export default function FullCatalogPage() {
 
                   <p className="text-sm text-gray-600">MOQ: {item.moq}</p> */}
 
-                  <button className="mt-5 w-full bg-[#b88a2d] hover:bg-[#a67925] text-white py-2 rounded-full font-medium transition">
-                    ADD TO QUOTE
-                  </button>
+                  <div className="mt-5">
+                    <AddToQuoteButton product={item} />
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Floating Inquiry Button */}
-        <div className="fixed bottom-6 right-6">
-          <button className="flex items-center gap-2 bg-[#b88a2d] hover:bg-[#a67925] text-white px-5 py-3 rounded-full shadow-lg font-medium">
-            ✉ Inquiry List (0 Items)
-          </button>
-        </div>
+        {/* Floating Quote Button */}
+        <FloatingQuoteButton />
       </section>
 
       <Footer />

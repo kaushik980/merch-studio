@@ -1,106 +1,151 @@
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, Phone, Mail, Linkedin, Twitter, Facebook } from "lucide-react";
+import { MapPin, Phone, Mail, Linkedin, Instagram, Facebook } from "lucide-react";
+import { useState } from "react";
+import { postSubscriber } from "@/lib/strapi";
+import emailjs from "@emailjs/browser";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+
+    try {
+      await postSubscriber(email);
+
+      await emailjs.send(
+        "service_p2zipif",
+        "template_bpdk1ma",
+        {
+          from_name: "Newsletter",
+          from_email: email,
+          message: `New subscriber: ${email}`,
+        },
+        "i4bGyEBc8W9aH8CJV"
+      );
+
+      setStatus("success");
+      setMessage("Thank you for subscribing!");
+      setEmail("");
+      setTimeout(() => setStatus("idle"), 3000);
+    } catch (error) {
+      console.error("Subscribe error:", error);
+      setStatus("error");
+      setMessage("Failed to subscribe. Please try again.");
+      setTimeout(() => setStatus("idle"), 3000);
+    }
+  };
   /* ✅ Dynamic Quick Links */
   const quickLinks = [
     { name: "Home", href: "/" },
     { name: "About Us", href: "/#about" },
-    { name: "Services", href: "/services" },
     { name: "Case Studies", href: "/case-studies" },
-    { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/#contact" },
-  ];
-
-  /* ✅ Dynamic Services Links */
-  const servicesLinks = [
-    { name: "Strategy & Consulting", href: "/services" },
-    { name: "Product Development", href: "/services" },
-    { name: "Digital Transformation", href: "/services" },
-    { name: "Data Analytics", href: "/services" },
-    { name: "UX/UI Design", href: "/services" },
   ];
 
   return (
     <>
     <footer className="bg-[#201f1f] text-white pt-16 pb-8 px-6">
       {/* Main Footer Grid */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* ================= LEFT COMPANY INFO ================= */}
-       
-
-        {/* ================= QUICK LINKS ================= */}
         <div>
-          <h3 className="text-[#b88a2d] font-semibold mb-5 uppercase">
-            Quick Links
-          </h3>
+          <h2 className="text-2xl font-bold mb-3">Merch Studio</h2>
+          <p className="text-gray-400 mb-6 leading-relaxed">
+            Your trusted partner for custom merchandise solutions. We specialize in creating high-quality branded products for businesses of all sizes.
+          </p>
 
-          <ul className="space-y-3 text-gray-300">
-            {quickLinks.map((link) => (
-              <li key={link.name}>
-                <Link href={link.href} className="hover:text-white transition">
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* ================= OUR SERVICES ================= */}
-        <div>
-          <h3 className="text-[#b88a2d] font-semibold mb-5 uppercase">
-            Our Services
-          </h3>
-
-          <ul className="space-y-3 text-gray-300">
-            {servicesLinks.map((service) => (
-              <li key={service.name}>
-                <Link
-                  href={service.href}
-                  className="hover:text-white transition"
-                >
-                  {service.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* ================= NEWSLETTER ================= */}
-        <div>
-          <h3 className="text-[#b88a2d] font-semibold mb-5 uppercase">
-            Stay Connected
-          </h3>
-
-          <p className="text-gray-300 mb-4">Sign up for our newsletter</p>
-
-          {/* Input */}
-          <input
-            type="email"
-            placeholder="Enter your email"
-            className="w-full px-4 py-2 rounded-md bg-white text-black mb-4
-            focus:ring-2 focus:ring-[#b88a2d] outline-none"
-          />
-
-          {/* Button */}
-          <button className="w-full bg-[#b88a2d] hover:bg-[#a67925] transition text-white py-2 rounded-md font-medium">
-            Subscribe
-          </button>
+          <div className="space-y-3 text-gray-300 text-sm">
+            <div className="flex items-start gap-3">
+              <Phone size={18} className="text-[#b88a2d] mt-0.5 flex-shrink-0" />
+              <span>+1 (555) 123-4567</span>
+            </div>
+            <div className="flex items-start gap-3">
+              <Mail size={18} className="text-[#b88a2d] mt-0.5 flex-shrink-0" />
+              <span>hello@merchstudio.com</span>
+            </div>
+          </div>
 
           {/* Social Icons */}
           <div className="flex gap-4 mt-6 text-[#b88a2d]">
-            <a href="https://linkedin.com" target="_blank">
-              <Linkedin className="hover:text-white transition cursor-pointer" />
+            <a href="https://www.instagram.com/merchstudio_ss/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
+              <Instagram size={20} />
             </a>
 
-            <a href="https://twitter.com" target="_blank">
-              <Twitter className="hover:text-white transition cursor-pointer" />
+            <a href="https://www.facebook.com/profile.php?id=61586489281004" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
+              <Facebook size={20} />
             </a>
 
-            <a href="https://facebook.com" target="_blank">
-              <Facebook className="hover:text-white transition cursor-pointer" />
+            <a href="https://www.linkedin.com/company/110199122/admin/dashboard/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
+              <Linkedin size={20} />
             </a>
+          </div>
+        </div>
+
+        {/* ================= RIGHT SECTION ================= */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-[#b88a2d] font-semibold mb-5 uppercase">
+              Quick Links
+            </h3>
+
+            <ul className="space-y-3 text-gray-300">
+              {quickLinks.map((link) => (
+                <li key={link.name}>
+                  <Link href={link.href} className="hover:text-white transition">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Newsletter */}
+          <div>
+            <h3 className="text-[#b88a2d] font-semibold mb-5 uppercase">
+              Stay Connected
+            </h3>
+
+            <p className="text-gray-300 text-sm mb-4">Subscribe to our newsletter</p>
+
+            {/* Subscribe Form */}
+            <form onSubmit={handleSubscribe} className="space-y-3">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full px-4 py-2 rounded-md bg-white text-black text-sm focus:ring-2 focus:ring-[#b88a2d] outline-none"
+              />
+
+              <button
+                type="submit"
+                disabled={status === "loading"}
+                className={`w-full py-2 rounded-md font-medium transition text-sm ${
+                  status === "success"
+                    ? "bg-green-600 text-white"
+                    : status === "error"
+                    ? "bg-red-600 text-white"
+                    : "bg-[#b88a2d] hover:bg-[#a67925] text-white disabled:opacity-50"
+                }`}
+              >
+                {status === "loading" ? "Subscribing..." : status === "success" ? "✓ Subscribed!" : "Subscribe"}
+              </button>
+            </form>
+
+            {message && (
+              <p className={`text-xs mt-2 ${status === "success" ? "text-green-400" : "text-red-400"}`}>
+                {message}
+              </p>
+            )}
           </div>
         </div>
       </div>

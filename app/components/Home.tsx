@@ -1,24 +1,22 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Banner, getStrapiImageUrl } from "@/lib/strapi";
 
-export default function Home() {
-  const images = [
-    "/WEBSITE-BANNER1.png",
-    "/WEBSITE-BANNER2.png",
-    "/WEBSITE-BANNER3.png",
-  ];
-
+export default function Home({ banners: initialBanners }: { banners: Banner[] }) {
+  const [banners, setBanners] = useState<Banner[]>(initialBanners);
   const [current, setCurrent] = useState(0);
 
   // ✅ Auto Slide
   useEffect(() => {
+    if (banners.length === 0) return;
+
     const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % images.length);
+      setCurrent((prev) => (prev + 1) % banners.length);
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [banners.length]);
 
   return (
     <main className="bg-[#f7efe3]">
@@ -27,31 +25,39 @@ export default function Home() {
       {/* ===================== */}
       <section className="w-full px-0">
         <div className="relative w-full h-50 md:h-80 lg:h-105 overflow-hidden rounded-none md:rounded-xl">
-          {images.map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              alt="Banner"
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-                index === current ? "opacity-100" : "opacity-0"
-              }`}
-            />
-          ))}
+          {banners.length > 0 ? (
+            <>
+              {banners.map((banner, index) => (
+                <img
+                  key={banner.id}
+                  src={getStrapiImageUrl(banner.image?.url) || '/WEBSITE-BANNER1.png'}
+                  alt={banner.image?.alternativeText || `Banner ${index + 1}`}
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                    index === current ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+              ))}
 
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-black/10"></div>
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-black/10"></div>
 
-          {/* Dots */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-            {images.map((_, i) => (
-              <div
-                key={i}
-                className={`w-2.5 h-2.5 rounded-full ${
-                  i === current ? "bg-white" : "bg-white/50"
-                }`}
-              ></div>
-            ))}
-          </div>
+              {/* Dots */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                {banners.map((_, i) => (
+                  <div
+                    key={i}
+                    className={`w-2.5 h-2.5 rounded-full ${
+                      i === current ? "bg-white" : "bg-white/50"
+                    }`}
+                  ></div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className="w-full h-full bg-gray-300 flex items-center justify-center">
+              <p className="text-gray-600">No banners available</p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -83,15 +89,6 @@ export default function Home() {
             >
               Explore Our Catalog
             </button>
-
-            <a
-              href="https://www.youtube.com/watch?v=C1NI7BwpZ-M"
-              target="_blank"
-            >
-              <button className="px-6 py-3 rounded-xl border border-[#2b1a12] text-[#2b1a12] font-medium hover:bg-white transition">
-                How It Works
-              </button>
-            </a>
           </div>
         </div>
       </section>

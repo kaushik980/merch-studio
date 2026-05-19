@@ -1,37 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getProducts, getStrapiImageUrl } from "@/lib/strapi";
+import AddToQuoteButton from "@/app/components/AddToQuoteButton";
 
-export default function CatalogPage() {
-  const products = [
-    {
-      name: "Seasonal gift",
-      material: "100% Organic Cotton",
-      moq: "50 units",
-      image:
-        "/seasonal gift.png",
-    },
-    {
-      name: "Corporate essentials kit - Copy",
-      material: "Bamboo & Recycled Paper",
-      moq: "100 units",
-      image:
-        "/corporate essentials kit - Copy.png",
-    },
-    {
-      name: "Classy Notebook Pen Set",
-      material: "Reusable Canvas Fabric",
-      moq: "200 units",
-      image:
-        "/Classy Notebook Pen Set.png",
-    },
-    {
-      name: "Custom Ceramic Mug",
-      material: "High Quality Ceramic",
-      moq: "75 units",
-      image:
-        "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=600&q=80",
-    },
-  ];
+export default async function CatalogPage() {
+  const allProducts = await getProducts();
+  const products = allProducts.slice(0, 3);
 
   return (
     <section className="min-h-screen bg-[#fdf8f1] px-6 py-16">
@@ -68,13 +42,20 @@ export default function CatalogPage() {
             >
               {/* ✅ Same Size Image */}
               <div className="p-6">
-                <div className="relative w-full h-72 overflow-hidden rounded-xl">
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    fill
-                    className="object-cover"
-                  />
+                <div className="relative w-full h-72 overflow-hidden rounded-xl bg-gray-100">
+                  {item.image?.url && (
+                    <Image
+                      src={getStrapiImageUrl(item.image.url) || ''}
+                      alt={item.image.alternativeText || item.name}
+                      fill
+                      className="object-cover"
+                    />
+                  )}
+                  {!item.image?.url && (
+                    <div className="flex items-center justify-center h-full bg-gray-200 text-gray-500">
+                      No image
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -90,9 +71,9 @@ export default function CatalogPage() {
 
                 <p className="text-sm text-gray-600">MOQ: {item.moq}</p> */}
 
-                <button className="mt-5 w-full bg-[#b88a2d] hover:bg-[#a67925] text-white py-2 rounded-full font-medium transition">
-                  ADD TO QUOTE
-                </button>
+                <div className="mt-5">
+                  <AddToQuoteButton product={item} />
+                </div>
               </div>
             </div>
           ))}

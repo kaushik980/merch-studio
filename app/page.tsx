@@ -6,15 +6,18 @@ import ContactPage from "./contact/page";
 import Footer from "./components/Footer";
 import About from "./about/page";
 import TeamPage from "./Brands/page";
+import { getBanners } from "@/lib/strapi";
 
-export default function Page() {
+export default async function Page() {
+  const banners = await getBanners();
+
   return (
     <>
       <Navbar />
 
       {/* HOME */}
       <section id="home">
-        <HomeSection />
+        <HomeSection banners={banners} />
       </section>
 
       {/* ABOUT */}

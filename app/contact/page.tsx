@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Phone, Mail, MapPin } from "lucide-react";
 import emailjs from "@emailjs/browser";
+import { postContactSubmission } from "@/lib/strapi";
 
 export default function ContactPage() {
   // ✅ Form State
@@ -54,6 +55,8 @@ export default function ContactPage() {
 
     try {
       await emailjs.send(serviceID, templateID, formData, publicKey);
+
+      await postContactSubmission(formData);
 
       setStatus("✅ Message sent successfully!");
 
