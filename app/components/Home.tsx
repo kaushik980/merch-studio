@@ -7,6 +7,10 @@ export default function Home({ banners: initialBanners }: { banners: Banner[] })
   const [banners, setBanners] = useState<Banner[]>(initialBanners);
   const [current, setCurrent] = useState(0);
 
+  useEffect(() => {
+    console.log('Home component received banners:', initialBanners);
+  }, [initialBanners]);
+
   // ✅ Auto Slide
   useEffect(() => {
     if (banners.length === 0) return;
@@ -24,19 +28,24 @@ export default function Home({ banners: initialBanners }: { banners: Banner[] })
       {/* ✅ TOP BANNER ONLY */}
       {/* ===================== */}
       <section className="w-full px-0">
-        <div className="relative w-full h-50 md:h-80 lg:h-105 overflow-hidden rounded-none md:rounded-xl">
+        <div className="relative w-full overflow-hidden rounded-none md:rounded-xl" style={{ aspectRatio: '721/301' }}>
           {banners.length > 0 ? (
             <>
-              {banners.map((banner, index) => (
-                <img
-                  key={banner.id}
-                  src={getStrapiImageUrl(banner.image?.url) || '/WEBSITE-BANNER1.png'}
-                  alt={banner.image?.alternativeText || `Banner ${index + 1}`}
-                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-                    index === current ? "opacity-100" : "opacity-0"
-                  }`}
-                />
-              ))}
+              {banners.map((banner, index) => {
+                const imageUrl = getStrapiImageUrl(banner.image?.url) || '/WEBSITE-BANNER1.png';
+                console.log(`Banner ${index}:`, banner, 'Image URL:', imageUrl);
+                return (
+                  <img
+                    key={banner.id}
+                    src={imageUrl}
+                    alt={banner.image?.alternativeText || `Banner ${index + 1}`}
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                      index === current ? "opacity-100" : "opacity-0"
+                    }`}
+                    onError={(e) => console.error(`Image failed to load:`, imageUrl, e)}
+                  />
+                );
+              })}
 
               {/* Overlay */}
               <div className="absolute inset-0 bg-black/10"></div>
@@ -64,7 +73,7 @@ export default function Home({ banners: initialBanners }: { banners: Banner[] })
      
       {/* ✅ BELOW CONTENT */}
       {/* ===================== */}
-      <section className="flex items-center justify-center px-6 py-20">
+      <section className="flex items-center justify-center px-6 py-12 md:py-20">
         <div className="max-w-3xl w-full text-center">
           {/* Heading */}
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#2b1a12] leading-tight">

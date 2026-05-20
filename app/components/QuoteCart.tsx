@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { useRouter } from 'next/navigation';
 import { postQuoteRequest, getProducts, Product } from '@/lib/strapi';
 import emailjs from '@emailjs/browser';
 import { X, Plus, Minus, Search } from 'lucide-react';
@@ -96,6 +97,7 @@ export function useQuote() {
 }
 
 function QuoteCartDrawer() {
+  const router = useRouter();
   const { items, addItem, removeItem, clearCart, isDrawerOpen, closeDrawer } = useQuote();
   const [loading, setLoading] = useState(false);
   const [allProducts, setAllProducts] = useState<Product[]>([]);
@@ -232,7 +234,18 @@ function QuoteCartDrawer() {
           )}
 
           {items.length === 0 ? (
-            <p className="text-gray-500 text-center py-8">No items in quote. Use "Add Products" above.</p>
+            <div className="text-center py-8">
+              <p className="text-gray-500 mb-4">No items in quote.</p>
+              <button
+                onClick={() => {
+                  closeDrawer();
+                  router.push('/catalog/all');
+                }}
+                className="w-full bg-[#b88a2d] hover:bg-[#a67925] text-white py-2 rounded-lg font-medium transition"
+              >
+                Request Quote
+              </button>
+            </div>
           ) : (
             <>
               <div className="space-y-4 mb-6">

@@ -30,7 +30,7 @@ export default function Process() {
   ];
 
   return (
-    <main className="min-h-screen bg-linear-to-b from-[#f8f2e8] to-[#f3d7b0] px-6 py-20">
+    <main className="bg-linear-to-b from-[#f8f2e8] to-[#f3d7b0] px-6 py-12 md:py-20">
       <div className="max-w-7xl mx-auto text-center">
 
         {/* Heading */}

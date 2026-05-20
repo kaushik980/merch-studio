@@ -87,7 +87,12 @@ export async function getProducts(): Promise<Product[]> {
 export function getStrapiImageUrl(imageUrl: string | null | undefined): string | null {
   if (!imageUrl) return null;
   if (imageUrl.startsWith('http')) return imageUrl;
-  return `${STRAPI_URL}${imageUrl}`;
+
+  // Handle relative URLs
+  const url = imageUrl.startsWith('/') ? imageUrl : `/${imageUrl}`;
+  const fullUrl = `${STRAPI_URL}${url}`;
+  console.log('Image URL:', imageUrl, '→', fullUrl);
+  return fullUrl;
 }
 
 export async function getBanners(): Promise<Banner[]> {
@@ -112,7 +117,9 @@ export async function getBanners(): Promise<Banner[]> {
     }
 
     const { data } = await res.json();
-    return data.map((item: any) => {
+    console.log('Banners from Strapi:', data);
+
+    const mapped = data.map((item: any) => {
       let imageData = null;
       if (item.image) {
         const img = Array.isArray(item.image) ? item.image[0] : item.image;
@@ -132,6 +139,9 @@ export async function getBanners(): Promise<Banner[]> {
         active: item.active,
       };
     });
+
+    console.log('Mapped banners:', mapped);
+    return mapped;
   } catch (error) {
     console.error('Failed to fetch banners:', error);
     return [];

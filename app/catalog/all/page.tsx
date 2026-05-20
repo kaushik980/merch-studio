@@ -140,8 +140,18 @@ export default function FullCatalogPage() {
           {/* Product Grid */}
           <div className="lg:col-span-3">
             {loading ? (
-              <div className="text-center py-12">
-                <p className="text-gray-600">Loading products...</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                {[...Array(6)].map((_, i) => (
+                  <div key={i} className="bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden animate-pulse">
+                    <div className="p-6">
+                      <div className="w-full aspect-square bg-gray-200 rounded-xl"></div>
+                    </div>
+                    <div className="px-6 pb-6">
+                      <div className="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
+                      <div className="h-10 bg-gray-200 rounded w-full"></div>
+                    </div>
+                  </div>
+                ))}
               </div>
             ) : filteredProducts.length === 0 ? (
               <div className="text-center py-12">
