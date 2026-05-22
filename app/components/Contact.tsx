@@ -49,9 +49,9 @@ export default function Contact() {
     setStatus("⏳ Sending...");
 
     // ✅ EmailJS Config
-    const serviceID = "service_p2zipif";
-    const templateID = "template_bpdk1ma";
-    const publicKey = "i4bGyEBc8W9aH8CJV";
+    const serviceID = "service_mfsss32";
+    const templateID = "template_5847juf";
+    const publicKey = "18ZC-K1PbrsG6t_Ar";
 
     try {
       await emailjs.send(serviceID, templateID, formData, publicKey);
